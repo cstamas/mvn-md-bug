@@ -23,10 +23,15 @@ mvn clean deploy -DaltDeploymentRepository=localhost-nexus::default::http://loca
 
 (basically just deploy it somewhere).
 
-Output with Maven 3.6.0:
+Output with Maven 3.6.0, that clearly shows metadata uploaded twice (just as explained in MDEPLOY-221):
 
 ```
-cstamas@Urnebes ~/tmp/mvn-md-bug $ mvn clean deploy -DaltDeploymentRepository=localhost-nexus::default::http://localhost:8081/content/repositories/snapshots/
+cstamas@Urnebes ~/tmp/mvn-md-bug  (master)$ mvn -V clean deploy -DaltDeploymentRepository=localhost-nexus::default::http://localhost:8081/content/repositories/snapshots/
+Apache Maven 3.6.0 (97c98ec64a1fdfee7767ce5ffb20918da4f719f3; 2018-10-24T20:41:47+02:00)
+Maven home: /home/linuxbrew/.linuxbrew/Cellar/maven/3.6.0/libexec
+Java version: 1.8.0_191, vendor: Oracle Corporation, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "linux", version: "4.15.0-43-generic", arch: "amd64", family: "unix"
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] ---------------------------< org.test:site >----------------------------
@@ -69,26 +74,26 @@ cstamas@Urnebes ~/tmp/mvn-md-bug $ mvn clean deploy -DaltDeploymentRepository=lo
 [INFO] --- maven-deploy-plugin:2.7:deploy (default-deploy) @ site ---
 [INFO] Using alternate deployment repository localhost-nexus::default::http://localhost:8081/content/repositories/snapshots/
 Downloading from localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/maven-metadata.xml
-Downloaded from localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/maven-metadata.xml (1.1 kB at 25 kB/s)
-Uploading to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/site-1.0-20190128.131815-12.jar
-Uploaded to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/site-1.0-20190128.131815-12.jar (2.0 kB at 58 kB/s)
-Uploading to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/site-1.0-20190128.131815-12.pom
-Uploaded to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/site-1.0-20190128.131815-12.pom (3.0 kB at 103 kB/s)
+Downloaded from localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/maven-metadata.xml (1.1 kB at 23 kB/s)
+Uploading to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/site-1.0-20190128.133013-13.jar
+Uploaded to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/site-1.0-20190128.133013-13.jar (2.0 kB at 66 kB/s)
+Uploading to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/site-1.0-20190128.133013-13.pom
+Uploaded to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/site-1.0-20190128.133013-13.pom (3.0 kB at 114 kB/s)
 Downloading from localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/maven-metadata.xml
-Downloaded from localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/maven-metadata.xml (270 B at 17 kB/s)
+Downloaded from localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/maven-metadata.xml (270 B at 21 kB/s)
 Uploading to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/maven-metadata.xml
-Uploaded to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/maven-metadata.xml (1.1 kB at 52 kB/s)
+Uploaded to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/maven-metadata.xml (1.1 kB at 57 kB/s)
 Uploading to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/maven-metadata.xml
-Uploaded to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/maven-metadata.xml (270 B at 12 kB/s)
-Uploading to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/site-1.0-20190128.131815-12-bundle.zip
-Uploaded to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/site-1.0-20190128.131815-12-bundle.zip (37 kB at 1.1 MB/s)
+Uploaded to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/maven-metadata.xml (270 B at 9.6 kB/s)
+Uploading to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/site-1.0-20190128.133013-13-bundle.zip
+Uploaded to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/site-1.0-20190128.133013-13-bundle.zip (37 kB at 876 kB/s)
 Uploading to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/maven-metadata.xml
-Uploaded to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/maven-metadata.xml (1.1 kB at 48 kB/s)
+Uploaded to localhost-nexus: http://localhost:8081/content/repositories/snapshots/org/test/site/1.0-SNAPSHOT/maven-metadata.xml (1.1 kB at 41 kB/s)
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.435 s
-[INFO] Finished at: 2019-01-28T14:18:15+01:00
+[INFO] Total time:  1.383 s
+[INFO] Finished at: 2019-01-28T14:30:13+01:00
 [INFO] ------------------------------------------------------------------------
-cstamas@Urnebes ~/tmp/mvn-md-bug $
+cstamas@Urnebes ~/tmp/mvn-md-bug  (master *)$ 
 ```
