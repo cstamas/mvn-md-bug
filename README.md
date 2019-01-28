@@ -11,7 +11,8 @@ Maven deploy version (and any other) metadata only once with proper timestmaps
 (those that have the deployed artifacts) whatever count of attached 
 artifacts are there.
 
-
+Reported as:
+https://issues.apache.org/jira/browse/MNG-6581
 
 ## Reproducing
 
